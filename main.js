@@ -1,4 +1,4 @@
-import {loadGLTF, loadVideo} from "https://palanikjs.github.io/libs/loader.js";
+import {loadGLTF, loadVideo} from "./assets/libs/loader.js";
 const THREE = window.MINDAR.IMAGE.THREE;
 
 document.addEventListener('DOMContentLoaded', () => {
