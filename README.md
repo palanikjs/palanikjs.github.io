@@ -15,3 +15,5 @@ A comprehensive gold market analysis dashboard featuring:
 Built with React and deployed on GitHub Pages.
 
 **Live at:** https://palanikjs.github.io/
+
+**Note:** This demo version uses sample data for GitHub Pages compatibility. For real-time data and AI analysis, the full version requires backend API integration.
