@@ -105,19 +105,84 @@
         }
 
         async function fetchFromClaude(prompt) {
-          const response = await fetch("https://api.anthropic.com/v1/messages", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              model: "claude-sonnet-4-20250514",
-              max_tokens: 4000,
-              tools: [{ type: "web_search_20250305", name: "web_search" }],
-              messages: [{ role: "user", content: prompt }],
-            }),
-          });
-          const data = await response.json();
-          const texts = data.content?.filter((b) => b.type === "text").map((b) => b.text) || [];
-          return texts.join("\n");
+          // Mock data for GitHub Pages deployment
+          if (prompt.includes('prices')) {
+            return JSON.stringify({
+              "gold_24k_10g": "144,500",
+              "gold_22k_10g": "132,500",
+              "gold_intl_oz": "2,850",
+              "mcx_gold": "144,200",
+              "gold_24k_1g": "14,450",
+              "silver_1kg": "95,000",
+              "usd_inr": "83.50",
+              "us_10y_yield": "4.25",
+              "sensex": "72,500",
+              "crude_oil": "78.50",
+              "dxy": "104.20",
+              "rbi_repo": "6.50"
+            });
+          } else if (prompt.includes('analysis')) {
+            return JSON.stringify({
+              "prediction_short": {"direction": "up", "confidence": "high", "target": "₹148,000-152,000", "reasoning": "Strong seasonal demand and central bank buying momentum"},
+              "prediction_medium": {"direction": "up", "confidence": "medium", "target": "₹155,000-165,000", "reasoning": "Rate cut expectations and geopolitical tensions supporting prices"},
+              "prediction_long": {"direction": "up", "confidence": "high", "target": "₹175,000-200,000", "reasoning": "Long-term inflation hedge demand and supply constraints"},
+              "key_drivers": [
+                {"factor": "Central Bank Buying", "impact": "bullish", "detail": "Record purchases by China, India, and Middle East countries"},
+                {"factor": "US Dollar Weakness", "impact": "bullish", "detail": "DXY below 105 supporting gold prices"},
+                {"factor": "Geopolitical Tensions", "impact": "bullish", "detail": "Middle East conflicts driving safe-haven demand"},
+                {"factor": "Rate Cut Expectations", "impact": "bullish", "detail": "Fed and RBI rate cuts expected in coming months"},
+                {"factor": "Seasonal Demand", "impact": "bullish", "detail": "Strong wedding season and festival demand in India"},
+                {"factor": "Supply Constraints", "impact": "bullish", "detail": "Mining disruptions and environmental regulations"}
+              ],
+              "news_highlights": [
+                {"headline": "China's gold reserves hit record high", "source": "Reuters", "impact": "bullish"},
+                {"headline": "Fed signals potential rate cuts", "source": "Bloomberg", "impact": "bullish"},
+                {"headline": "India's gold imports surge 25%", "source": "Economic Times", "impact": "bullish"},
+                {"headline": "Middle East tensions escalate", "source": "BBC", "impact": "bullish"},
+                {"headline": "Global inflation concerns rise", "source": "WSJ", "impact": "neutral"}
+              ],
+              "buy_sell_signal": "BUY",
+              "signal_reasoning": "Multiple bullish factors align with strong technical setup. Current levels offer excellent risk-reward for long-term holding.",
+              "india_specific": {
+                "rbi_stance": "RBI maintaining neutral stance with focus on inflation control",
+                "import_duty": "Current duty at 15% with potential for reduction",
+                "seasonal_outlook": "Strong demand expected during wedding season",
+                "rupee_outlook": "INR expected to remain stable against USD"
+              },
+              "risk_alert": "Monitor US election outcomes and potential Fed policy shifts"
+            });
+          } else if (prompt.includes('strategy')) {
+            return JSON.stringify({
+              "current_zone": "fair_value",
+              "zone_reasoning": "Gold trading at fair value with balanced risk-reward. Not overbought or oversold.",
+              "support_levels": [
+                {"level": "140000", "strength": "strong", "note": "Major psychological level and 200-day MA"},
+                {"level": "135000", "strength": "moderate", "note": "Recent consolidation zone"},
+                {"level": "130000", "strength": "weak", "note": "Minor support level"}
+              ],
+              "resistance_levels": [
+                {"level": "150000", "strength": "strong", "note": "All-time high resistance"},
+                {"level": "155000", "strength": "moderate", "note": "Next major resistance"},
+                {"level": "160000", "strength": "weak", "note": "Extended target zone"}
+              ],
+              "buy_strategies": [
+                {"scenario": "Current levels", "entry_price": "₹142,000-145,000", "stop_loss": "₹138,000", "target": "₹155,000", "timeframe": "3-6 months", "risk_reward": "1:2.5", "confidence": "high"},
+                {"scenario": "Dip to support", "entry_price": "₹138,000-140,000", "stop_loss": "₹135,000", "target": "₹160,000", "timeframe": "6-12 months", "risk_reward": "1:3", "confidence": "medium"}
+              ],
+              "sell_strategies": [
+                {"scenario": "Break above resistance", "trigger": "Sustainable break above ₹150,000", "exit_price": "₹152,000-155,000", "reasoning": "Profit booking at major resistance", "timeframe": "1-3 months"}
+              ],
+              "dca_plan": {"recommended": "yes", "monthly_amount": "₹10,000-25,000 worth of gold", "reasoning": "Current fair valuation makes DCA strategy ideal for risk-averse investors"},
+              "seasonal_windows": [
+                {"period": "March-June", "action": "buy", "reasoning": "Peak wedding season demand"},
+                {"period": "September-November", "action": "hold", "reasoning": "Consolidation phase"},
+                {"period": "December-February", "action": "buy", "reasoning": "Year-end buying and festival demand"}
+              ],
+              "worst_case": "Sharp USD strength or unexpected Fed hawkishness could pressure prices below ₹130,000",
+              "best_case": "Escalating geopolitical tensions could drive prices above ₹175,000 within 6-12 months"
+            });
+          }
+          return "{}";
         }
 
         const Shimmer = ({ w = "100%", h = "20px" }) => (
